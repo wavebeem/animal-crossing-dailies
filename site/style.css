@@ -99,7 +99,6 @@ a {
   grid-template-columns: min-content 1fr;
   background: var(--color-content-bg);
   color: var(--color-content-fg);
-  border: var(--content-border);
 }
 
 @media (min-width: 600px) {

@@ -46,8 +46,12 @@ class State {
     });
   }
 
-  get(key) {
-    return this.data[`dailies/${key}`];
+  get(key, fallback) {
+    const path = `dailies/${key}`;
+    if (path in this.data) {
+      return this.data[path];
+    }
+    return fallback;
   }
 
   update(key, value) {
@@ -83,7 +87,7 @@ function main() {
   const state = new State();
   const lastUpdated = document.querySelector("[data-name='last-updated']");
   for (const daily of document.querySelectorAll("ac-daily")) {
-    daily.dataset.initialValue = state.get(daily.dataset.key);
+    daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {
       console.log(daily.dataset.key, event.detail);
       state.update(daily.dataset.key, event.detail);
