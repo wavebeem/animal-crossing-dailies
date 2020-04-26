@@ -1,0 +1,8 @@
+ac-daily {
+  display: flex;
+}
+
+.grid-1col {
+  display: grid;
+  gap: 1rem;
+}
