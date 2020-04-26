@@ -3,16 +3,14 @@ class ACDailyElement extends HTMLElement {
     switch (this.dataset.type) {
       case "number": {
         copyTemplate(this, "template-ac-daily-number");
-        this.label = this.querySelector("[data-name='label']");
+        this.description = this.querySelector("[data-name='description']");
         this.current = this.querySelector("[data-name='current']");
-        this.max = this.querySelector("[data-name='max']");
         this.increment = this.querySelector("[data-name='increment']");
         this.decrement = this.querySelector("[data-name='decrement']");
         this.value = +this.dataset.initialValue || 0;
-        this.label.textContent = this.dataset.name;
-        this.label.htmlFor = this.dataset.key;
+        this.description.textContent = this.dataset.description;
+        this.description.htmlFor = this.dataset.key;
         this.current.id = this.dataset.key;
-        this.max.textContent = this.dataset.max;
         this.increment.addEventListener("click", () => {
           this.value = Math.min(+this.dataset.max, +this.value + 1);
         });
@@ -21,6 +19,7 @@ class ACDailyElement extends HTMLElement {
         });
         break;
       }
+      // case "boolean":
       default: {
         this.textContent = `TODO: type ${this.dataset.type}`;
         break;
@@ -33,8 +32,22 @@ class ACDailyElement extends HTMLElement {
   }
 
   set value(value) {
+    switch (this.dataset.type) {
+      case "number": {
+        this.current.value = `${value} / ${this.dataset.max}`;
+        this.dataset.state =
+          +value === +this.dataset.max ? "complete" : "incomplete";
+        break;
+      }
+      case "boolean": {
+        this.current.checked = value;
+        this.dataset.state === value ? "complete" : "incomplete";
+      }
+      default: {
+        throw new Error("TODO");
+      }
+    }
     this._value = value;
-    this.current.value = value;
     dispatchEvent(this, "change", value);
   }
 }
@@ -85,12 +98,26 @@ function copyTemplate(element, id) {
   element.appendChild(document.getElementById(id).content.cloneNode(true));
 }
 
+function formatDate(date) {
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(date);
+}
+
 function main() {
   const state = new State();
+  const lastUpdated = document.querySelector("[data-name=last-updated]");
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key);
     daily.addEventListener("change", (event) => {
       state.update(daily.dataset.key, event.detail);
+      const date = new Date(state.data._last_updated);
+      lastUpdated.textContent = formatDate(date);
     });
   }
   customElements.define("ac-daily", ACDailyElement);

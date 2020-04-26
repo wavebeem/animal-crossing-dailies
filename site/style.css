@@ -1,8 +1,127 @@
+:root {
+  --color-body-bg: hsl(130, 40%, 95%);
+  --color-body-fg: hsl(60, 90%, 20%);
+
+  --color-section-bg: hsl(140, 40%, 65%);
+  --color-section-fg: hsl(60, 90%, 15%);
+
+  --color-content-bg: hsl(60, 35%, 95%);
+  --color-content-fg: hsl(60, 90%, 20%);
+
+  --color-footer-bg: hsl(40, 20%, 40%);
+  --color-footer-fg: hsl(60, 35%, 95%);
+
+  --color-current-bg: hsl(60, 35%, 100%);
+  --color-current-fg: hsl(40, 20%, 40%);
+  --border-current: 1px solid hsl(40, 20%, 90%);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI";
+  --font-serif: Georgia, serif;
+
+  --border-radius: 1rem;
+
+  scrollbar-color: var(--color-body-fg) var(--color-body-bg);
+  background: var(--color-body-bg);
+  color: var(--color-body-fg);
+  font-family: var(--font-sans);
+  padding: 0;
+  margin: 0;
+  /* Tabular numbers */
+  font-feature-settings: "tnum";
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+}
+
+body {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 1rem;
+}
+
 ac-daily {
   display: flex;
 }
 
 .grid-1col {
   display: grid;
-  gap: 1rem;
+  grid-gap: 1rem;
+}
+
+input,
+button {
+  color: inherit;
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.description {
+  flex: 1 1 auto;
+}
+
+[data-state="complete"] {
+  opacity: 0.5;
+}
+
+[data-state="complete"] .description {
+  text-decoration: line-through;
+}
+
+.current {
+  margin-left: 1rem;
+  text-align: center;
+  width: 4rem;
+  flex: 0 1 auto;
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-current-bg);
+  color: var(--color-current-fg);
+  border: var(--border-current);
+}
+
+.button {
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  line-height: 2rem;
+  margin-left: 1rem;
+  font-weight: bold;
+  border: 0;
+  /* padding: 0.5rem; */
+  border-radius: 9999px;
+  background: var(--color-content-fg);
+  color: var(--color-content-bg);
+}
+
+.bubble {
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.list-container {
+  background: var(--color-section-bg);
+  color: var(--color-section-fg);
+}
+
+.footer {
+  background: var(--color-footer-bg);
+  color: var(--color-footer-fg);
+}
+
+.daily-content {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fill, 1fr);
+  background: var(--color-content-bg);
+  color: var(--color-content-fg);
 }

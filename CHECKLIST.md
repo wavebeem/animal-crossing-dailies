@@ -1,0 +1,21 @@
+- catch 5 wasps
+- find 2 tree furnitures
+- find 4 fossils
+- find beach DIY
+- find morning villager DIY
+- find afternoon villager DIY
+- find evening villager DIY
+- water flowers
+- money tree
+- harvest 6 rocks
+- pick fruit
+- chop wood
+- check for shooting stars
+- check AM turnip prices
+- check PM turnip prices
+- check nooks cranny
+- check ables
+- use the ATM
+- buy KK song from nook shopping
+- check recycle bin
+- pick weeds

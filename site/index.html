@@ -7,32 +7,48 @@
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="main.js"></script>
   </head>
-  <body>
+  <body class="grid-1col">
     <h1>AC Dailies</h1>
-    <main>
-      <section class="grid-1col">
+    <div>
+      <h2>Last Daily Completed</h2>
+      <p data-name="last-updated"></p>
+    </div>
+    <main class="grid-1col">
+      <section>
         <h2>Items</h2>
-        <ac-daily
-          data-name="Wasps"
-          data-key="wasps"
-          data-type="number"
-          data-max="5"
-        ></ac-daily>
-        <ac-daily
-          data-name="Fossils"
-          data-key="fossils"
-          data-type="number"
-          data-max="4"
-        ></ac-daily>
+        <div class="grid-1col list-container bubble">
+          <ac-daily
+            class="grid-1col"
+            data-description="Catch five wasps"
+            data-key="wasps"
+            data-type="number"
+            data-max="5"
+          ></ac-daily>
+          <ac-daily
+            class="grid-1col"
+            data-description="Dig up four fossils"
+            data-key="fossils"
+            data-type="number"
+            data-max="4"
+          ></ac-daily>
+        </div>
       </section>
     </main>
-    <footer>&copy; 2020 <a href="https://mockbrian.com">Brian Mock</a></footer>
+    <footer class="footer bubble grid-1col">
+      <div>&copy; 2020 <a href="https://mockbrian.com">Brian Mock</a></div>
+      <div>
+        <a href="https://github.com/wavebeem/animal-crossing-dailies"
+          >Source code</a
+        >
+      </div>
+    </footer>
     <template id="template-ac-daily-number">
-      <label data-name="label"></label>
-      <input data-name="current" readonly />
-      <span data-name="max"></span>
-      <button data-name="decrement">&minus;</button>
-      <button data-name="increment">&plus;</button>
+      <div class="daily-content bubble">
+        <label data-name="description" class="description"></label>
+        <input data-name="current" readonly class="current" />
+        <button data-name="decrement" class="button">&minus;</button>
+        <button data-name="increment" class="button">&plus;</button>
+      </div>
     </template>
   </body>
 </html>
