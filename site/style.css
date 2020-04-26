@@ -13,7 +13,11 @@
 
   --color-current-bg: hsl(60, 35%, 100%);
   --color-current-fg: hsl(40, 20%, 40%);
-  --border-current: 1px solid hsl(40, 20%, 90%);
+  --border-current: 1px solid hsl(40, 20%, 80%);
+
+  --color-current-bg-complete: hsl(50, 80%, 70%);
+  --color-current-fg-complete: hsl(50, 80%, 20%);
+  --current-border-complete: 1px solid hsl(50, 80%, 40%);
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI";
   --font-serif: Georgia, serif;
@@ -84,9 +88,9 @@ a {
 }
 
 [data-state="complete"] .current {
-  background: var(--color-current-fg);
-  color: var(--color-current-bg);
-  border-color: var(--color-current-fg);
+  background: var(--color-current-bg-complete);
+  color: var(--color-current-fg-complete);
+  border: var(--current-border-complete);
 }
 
 .button {

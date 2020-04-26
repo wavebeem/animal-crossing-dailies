@@ -1,0 +1,3 @@
+- focus/hover styles for buttons
+- Implement boolean type
+- Finish the checklist
