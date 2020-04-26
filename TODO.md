@@ -1,3 +1,2 @@
-- focus/hover styles for buttons
-- Implement boolean type
+- Style for checkbox
 - Finish the checklist
