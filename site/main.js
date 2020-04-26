@@ -1,5 +1,6 @@
 class ACDailyElement extends HTMLElement {
   connectedCallback() {
+    this._isInitializing = true;
     copyTemplate(this, "template-ac-daily");
     this.description = this.querySelector("[data-name='description']");
     this.checkbox = this.querySelector("[data-name='checkbox']");
@@ -8,6 +9,7 @@ class ACDailyElement extends HTMLElement {
     this.checkbox.addEventListener("change", (event) => {
       this.value = event.target.checked;
     });
+    this._isInitializing = false;
   }
 
   get value() {
@@ -18,7 +20,9 @@ class ACDailyElement extends HTMLElement {
     this._value = value;
     this.checkbox.checked = value;
     this.dataset.state = value ? "complete" : "incomplete";
-    dispatchEvent(this, "update", value);
+    if (!this._isInitializing) {
+      dispatchEvent(this, "update", value);
+    }
   }
 }
 
@@ -86,6 +90,8 @@ function formatDate(date) {
 function main() {
   const state = new State();
   const lastUpdated = document.querySelector("[data-name='last-updated']");
+  const date = new Date(state.data._last_updated);
+  lastUpdated.textContent = formatDate(date);
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {

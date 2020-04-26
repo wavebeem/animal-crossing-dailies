@@ -1,2 +1,1 @@
 - Style for checkbox
-- Finish the checklist
