@@ -66,16 +66,12 @@ a {
   flex: 1 1 auto;
 }
 
-[data-state="complete"] {
-  opacity: 0.5;
-}
-
 [data-state="complete"] .description {
   text-decoration: line-through;
 }
 
 .current {
-  margin-left: 1rem;
+  margin-right: 1rem;
   text-align: center;
   width: 4rem;
   flex: 0 1 auto;
@@ -85,6 +81,12 @@ a {
   background: var(--color-current-bg);
   color: var(--color-current-fg);
   border: var(--border-current);
+}
+
+[data-state="complete"] .current {
+  background: var(--color-current-fg);
+  color: var(--color-current-bg);
+  border-color: var(--color-current-fg);
 }
 
 .button {
