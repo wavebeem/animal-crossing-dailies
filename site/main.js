@@ -1,30 +1,13 @@
 class ACDailyElement extends HTMLElement {
   connectedCallback() {
-    switch (this.dataset.type) {
-      case "number": {
-        copyTemplate(this, "template-ac-daily-number");
-        this.description = this.querySelector("[data-name='description']");
-        this.current = this.querySelector("[data-name='current']");
-        this.increment = this.querySelector("[data-name='increment']");
-        this.decrement = this.querySelector("[data-name='decrement']");
-        this.value = +this.dataset.initialValue || 0;
-        this.description.textContent = this.dataset.description;
-        this.description.htmlFor = this.dataset.key;
-        this.current.id = this.dataset.key;
-        this.increment.addEventListener("click", () => {
-          this.value = Math.min(+this.dataset.max, +this.value + 1);
-        });
-        this.decrement.addEventListener("click", () => {
-          this.value = Math.max(0, +this.value - 1);
-        });
-        break;
-      }
-      // case "boolean":
-      default: {
-        this.textContent = `TODO: type ${this.dataset.type}`;
-        break;
-      }
-    }
+    copyTemplate(this, "template-ac-daily");
+    this.description = this.querySelector("[data-name='description']");
+    this.checkbox = this.querySelector("[data-name='checkbox']");
+    this.value = JSON.parse(this.dataset.initialValue);
+    this.description.textContent = this.dataset.description;
+    this.checkbox.addEventListener("change", (event) => {
+      this.value = event.target.checked;
+    });
   }
 
   get value() {
@@ -32,23 +15,10 @@ class ACDailyElement extends HTMLElement {
   }
 
   set value(value) {
-    switch (this.dataset.type) {
-      case "number": {
-        this.current.value = `${value} / ${this.dataset.max}`;
-        this.dataset.state =
-          +value === +this.dataset.max ? "complete" : "incomplete";
-        break;
-      }
-      case "boolean": {
-        this.current.checked = value;
-        this.dataset.state === value ? "complete" : "incomplete";
-      }
-      default: {
-        throw new Error("TODO");
-      }
-    }
     this._value = value;
-    dispatchEvent(this, "change", value);
+    this.checkbox.checked = value;
+    this.dataset.state = value ? "complete" : "incomplete";
+    dispatchEvent(this, "update", value);
   }
 }
 
@@ -111,10 +81,11 @@ function formatDate(date) {
 
 function main() {
   const state = new State();
-  const lastUpdated = document.querySelector("[data-name=last-updated]");
+  const lastUpdated = document.querySelector("[data-name='last-updated']");
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key);
-    daily.addEventListener("change", (event) => {
+    daily.addEventListener("update", (event) => {
+      console.log(daily.dataset.key, event.detail);
       state.update(daily.dataset.key, event.detail);
       const date = new Date(state.data._last_updated);
       lastUpdated.textContent = formatDate(date);

@@ -8,56 +8,38 @@
     <script type="module" src="main.js"></script>
   </head>
   <body class="grid-1col">
-    <h1>AC Dailies</h1>
-    <div>
+    <h1 class="padding">AC Dailies</h1>
+    <div class="padding">
       <h2>Last Daily Completed</h2>
-      <p data-name="last-updated"></p>
+      <div data-name="last-updated"></div>
     </div>
     <main class="grid-1col">
-      <section>
-        <h2>Items</h2>
-        <div class="grid-1col list-container bubble">
+      <section class="grid-1col list-container">
+        <h2 class="padding">Items</h2>
+        <div class="grid-1col section">
           <ac-daily
-            class="grid-1col"
-            data-description="Catch five wasps"
+            data-description="Catch 5 wasps"
             data-key="wasps"
-            data-type="number"
-            data-max="5"
           ></ac-daily>
           <ac-daily
-            class="grid-1col"
-            data-description="Dig up four fossils"
+            data-description="Dig up 4 fossils"
             data-key="fossils"
-            data-type="number"
-            data-max="4"
           ></ac-daily>
         </div>
       </section>
     </main>
-    <footer class="footer bubble grid-1col">
-      <div>&copy; 2020 <a href="https://mockbrian.com">Brian Mock</a></div>
-      <div>
-        <a href="https://github.com/wavebeem/animal-crossing-dailies"
-          >Source code</a
-        >
-      </div>
+    <footer class="footer bubble">
+      &copy; 2020 <a href="https://mockbrian.com">Brian Mock</a>
+      &bullet;
+      <a href="https://github.com/wavebeem/animal-crossing-dailies">GitHub</a>
+      &bullet;
+      <a href="https://twitter.com/wavebeem">Twitter</a>
     </footer>
-    <template id="template-ac-daily-number">
-      <div class="daily-content bubble">
-        <input data-name="current" readonly class="current" />
-        <label data-name="description" class="description"></label>
-        <button data-name="decrement" class="button">
-          <svg viewbox="0 0 32 32" fill="currentColor">
-            <rect x="4" y="16" width="24" height="4"></rect>
-          </svg>
-        </button>
-        <button data-name="increment" class="button">
-          <svg viewbox="0 0 32 32" fill="currentColor">
-            <rect x="4" y="16" width="24" height="4"></rect>
-            <rect x="14" y="6" width="4" height="24"></rect>
-          </svg>
-        </button>
-      </div>
+    <template id="template-ac-daily">
+      <label class="daily-content bubble">
+        <input type="checkbox" data-name="checkbox" class="checkbox" />
+        <span data-name="description" class="description"></span>
+      </label>
     </template>
   </body>
 </html>
