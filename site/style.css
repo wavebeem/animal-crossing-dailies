@@ -1,25 +1,26 @@
 :root {
-  --color-body-bg: hsl(130, 40%, 95%);
-  --color-body-fg: hsl(60, 90%, 20%);
+  --body-bg: hsl(130, 40%, 95%);
+  --body-fg: hsl(60, 90%, 20%);
 
-  --color-content-bg: hsl(60, 35%, 95%);
-  --color-content-bg-hover: hsl(60, 35%, 90%);
-  --color-content-fg: hsl(60, 90%, 20%);
+  --content-bg: hsl(60, 35%, 95%);
+  --content-bg-hover: hsl(60, 35%, 90%);
+  --content-fg: hsl(60, 90%, 20%);
+  --content-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 
-  --color-section-bg: hsl(140, 40%, 65%);
+  --section-bg: hsl(140, 40%, 65%);
 
-  --color-check-bg: hsl(60, 35%, 100%);
-  --color-check-fg: hsl(60, 90%, 20%);
-  --color-check-border: hsl(60, 35%, 70%);
+  --check-bg: hsl(60, 35%, 100%);
+  --check-fg: hsl(60, 90%, 20%);
+  --check-border: hsl(60, 90%, 30%);
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI";
   --font-serif: Georgia, serif;
 
   --border-radius: 1rem;
 
-  scrollbar-color: var(--color-body-fg) var(--color-body-bg);
-  background: var(--color-body-bg);
-  color: var(--color-body-fg);
+  scrollbar-color: var(--body-fg) var(--body-bg);
+  background: var(--body-bg);
+  color: var(--body-fg);
   font-family: var(--font-sans);
   padding: 0;
   margin: 0;
@@ -38,9 +39,13 @@ h4 {
 
 body {
   display: flex;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 0;
   max-width: 600px;
+}
+
+footer {
+  text-align: center;
 }
 
 main {
@@ -82,13 +87,18 @@ a {
   width: 24px;
   height: 24px;
   border-radius: 0;
-  background: var(--color-check-bg);
-  border: 1px solid var(--color-check-border);
+  background: var(--check-bg);
+  border: 1px solid var(--check-border);
 }
 
 .checkbox:checked {
-  background: var(--color-check-fg);
-  box-shadow: inset 0 0 0 4px var(--color-check-bg);
+  background: var(--check-fg);
+  box-shadow: inset 0 0 0 4px var(--check-bg);
+}
+
+.checkbox:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 4px var(--check-bg), 0 0 0 1px white, 0 0 0 3px black;
 }
 
 .flex {
@@ -98,7 +108,7 @@ a {
 
 .section {
   padding: 0.5rem;
-  background: var(--color-section-bg);
+  background: var(--section-bg);
 }
 
 .bubble {
@@ -113,12 +123,13 @@ a {
 .daily-content {
   display: grid;
   grid-template-columns: min-content 1fr;
-  background: var(--color-content-bg);
-  color: var(--color-content-fg);
+  background: var(--content-bg);
+  color: var(--content-fg);
+  box-shadow: var(--content-box-shadow);
 }
 
 .daily-content:hover {
-  background: var(--color-content-bg-hover);
+  background: var(--content-bg-hover);
 }
 
 @media (min-width: 600px) {
