@@ -17,8 +17,8 @@
   --check-fg: hsl(60, 90%, 20%);
   --check-border: hsl(60, 90%, 30%);
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI";
-  --font-serif: Georgia, serif;
+  /* --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI"; */
+  --font-sans: "Helvetica Neue", "Segoe UI";
 
   --border-radius: 1rem;
 
@@ -34,11 +34,9 @@
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
   padding: 0;
   margin: 0;
-  font-family: var(--font-serif);
 }
 
 body {
@@ -68,7 +66,7 @@ ac-daily {
 
 :focus {
   outline: none;
-  box-shadow: 0 0 0 1px white, 0 0 0 3px black;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px black;
 }
 
 .footer {
@@ -78,6 +76,17 @@ ac-daily {
 .grid-1col {
   display: grid;
   grid-gap: 0.5rem;
+  gap: 0.5rem;
+}
+
+.gap-m {
+  grid-gap: 1rem;
+  gap: 1rem;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
 }
 
 .description {
@@ -94,9 +103,9 @@ ac-daily {
   -webkit-appearance: none;
   width: 24px;
   height: 24px;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--check-bg);
-  border: 1px solid var(--check-border);
+  border: 2px solid var(--check-border);
 }
 
 .checkbox:checked {
@@ -106,21 +115,30 @@ ac-daily {
 
 .checkbox:focus {
   outline: none;
-  box-shadow: inset 0 0 0 4px var(--check-bg), 0 0 0 1px white, 0 0 0 3px black;
+  box-shadow: inset 0 0 0 4px var(--check-bg), 0 0 0 2px white, 0 0 0 4px black;
 }
 
 .section {
-  padding: 0.5rem;
   background: var(--section-bg);
+  border-radius: var(--border-radius);
 }
 
-.bubble {
-  padding: 0.5rem;
+.rounded {
   border-radius: var(--border-radius);
 }
 
 .padding {
   padding: 0.5rem;
+}
+
+.spacer {
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.margin-h {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .daily-content {
@@ -145,11 +163,4 @@ ac-daily {
 
 .reset:hover {
   background: var(--danger-bg-hover);
-}
-
-@media (min-width: 600px) {
-  .section {
-    border-radius: var(--border-radius);
-    margin: 0.5rem;
-  }
 }

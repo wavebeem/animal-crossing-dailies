@@ -9,87 +9,85 @@
     <script type="module" src="main.js"></script>
   </head>
 
-  <body class="grid-1col">
-    <h1 class="padding">AC Dailies</h1>
+  <body class="grid-1col gap-m">
+    <h1 class="margin-h">AC Dailies</h1>
 
-    <div class="padding grid-1col">
-      <h2>Last Interaction</h2>
-      <div data-name="last-updated"></div>
-      <div>
-        <button type="button" class="reset" id="reset">
-          Reset
-        </button>
-      </div>
+    <div class="margin-h">
+      Press Reset every morning. Get as many daily tasks complete as you can.
+      All data is stored locally on your device. See below for your last updated
+      time.
     </div>
 
-    <main class="grid-1col">
-      <h2 class="padding">Daily Tasks</h2>
-      <div class="grid-1col section">
-        <ac-daily data-description="Catch wasps" data-key="wasps"></ac-daily>
-        <ac-daily
-          data-description="Dig up 4 fossils"
-          data-key="fossils"
-        ></ac-daily>
-        <ac-daily
-          data-description="Find furniture pieces in trees"
-          data-key="tree-furniture"
-        ></ac-daily>
-        <ac-daily
-          data-description="Find a DIY bottle on the beach"
-          data-key="beach-diy"
-        ></ac-daily>
-        <ac-daily
-          data-description="Find morning villager DIY recipe"
-          data-key="morning-diy"
-        ></ac-daily>
-        <ac-daily
-          data-description="Find afternoon villager DIY recipe"
-          data-key="afternoon-diy"
-        ></ac-daily>
-        <ac-daily
-          data-description="Find evening villager DIY recipe"
-          data-key="evening-diy"
-        ></ac-daily>
-        <ac-daily
-          data-description="Water flowers"
-          data-key="water-flowers"
-        ></ac-daily>
-        <ac-daily
-          data-description="Plant a money tree"
-          data-key="money-tree"
-        ></ac-daily>
-        <ac-daily
-          data-description="Hit 6 rocks"
-          data-key="harvest-rocks"
-        ></ac-daily>
-        <ac-daily data-description="Chop wood" data-key="chop-wood"></ac-daily>
-        <ac-daily
-          data-description="Check morning turnip price"
-          data-key="am-turnip"
-        ></ac-daily>
-        <ac-daily
-          data-description="Check afternoon turnip price"
-          data-key="pm-turnip"
-        ></ac-daily>
-        <ac-daily data-description="Use the ATM" data-key="atm"></ac-daily>
-        <ac-daily
-          data-description="Check the K.K. Slider song"
-          data-key="kk-song"
-        ></ac-daily>
-        <ac-daily
-          data-description="Check the lost and found"
-          data-key="lost-and-found"
-        ></ac-daily>
-        <ac-daily
-          data-description="Check Able Sisters"
-          data-key="able"
-        ></ac-daily>
-        <ac-daily
-          data-description="Check Nook's Cranny"
-          data-key="nook"
-        ></ac-daily>
-        <ac-daily data-description="Pick weeds" data-key="weeds"></ac-daily>
-      </div>
+    <div class="margin-h flex">
+      <button type="button" class="reset" id="reset">
+        Reset
+      </button>
+      <div class="spacer"></div>
+      <div data-name="last-updated"></div>
+    </div>
+
+    <main class="grid-1col section margin-h padding">
+      <ac-daily data-description="Catch wasps" data-key="wasps"></ac-daily>
+      <ac-daily data-description="Dig up fossils" data-key="fossils"></ac-daily>
+      <ac-daily
+        data-description="Find furniture pieces in trees"
+        data-key="tree-furniture"
+      ></ac-daily>
+      <ac-daily
+        data-description="Find a DIY bottle on the beach"
+        data-key="beach-diy"
+      ></ac-daily>
+      <ac-daily
+        data-description="Find morning villager DIY recipe"
+        data-key="morning-diy"
+      ></ac-daily>
+      <ac-daily
+        data-description="Find afternoon villager DIY recipe"
+        data-key="afternoon-diy"
+      ></ac-daily>
+      <ac-daily
+        data-description="Find evening villager DIY recipe"
+        data-key="evening-diy"
+      ></ac-daily>
+      <ac-daily
+        data-description="Water flowers"
+        data-key="water-flowers"
+      ></ac-daily>
+      <ac-daily
+        data-description="Plant a money tree"
+        data-key="money-tree"
+      ></ac-daily>
+      <ac-daily
+        data-description="Hit rocks"
+        data-key="harvest-rocks"
+      ></ac-daily>
+      <ac-daily data-description="Chop wood" data-key="chop-wood"></ac-daily>
+      <ac-daily
+        data-description="Check morning turnip price"
+        data-key="am-turnip"
+      ></ac-daily>
+      <ac-daily
+        data-description="Check afternoon turnip price"
+        data-key="pm-turnip"
+      ></ac-daily>
+      <ac-daily data-description="Use the ATM" data-key="atm"></ac-daily>
+      <ac-daily
+        data-description="Check the K.K. Slider song"
+        data-key="kk-song"
+      ></ac-daily>
+      <ac-daily
+        data-description="Check the lost and found"
+        data-key="lost-and-found"
+      ></ac-daily>
+      <ac-daily
+        data-description="Check Able Sisters"
+        data-key="able"
+      ></ac-daily>
+      <ac-daily
+        data-description="Check Nook's Cranny"
+        data-key="nook"
+      ></ac-daily>
+      <ac-daily data-description="Pick weeds" data-key="weeds"></ac-daily>
     </main>
 
     <footer class="footer padding">
@@ -102,7 +100,7 @@
     </footer>
 
     <template id="template-ac-daily">
-      <label class="daily-content bubble">
+      <label class="daily-content padding rounded">
         <input type="checkbox" data-name="checkbox" class="checkbox" />
         <span data-name="description" class="description"></span>
       </label>
