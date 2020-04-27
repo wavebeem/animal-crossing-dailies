@@ -1,1 +1,3 @@
-- Style for checkbox
+- Spacing
+- Favicon
+- Clear all data button
