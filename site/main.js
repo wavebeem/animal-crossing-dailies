@@ -105,6 +105,14 @@ function main() {
     });
   }
   customElements.define("ac-daily", ACDailyElement);
+  document.querySelector("#reset").addEventListener("click", () => {
+    for (const daily of document.querySelectorAll("ac-daily")) {
+      daily.value = false;
+    }
+  });
+  document.querySelector(
+    "#copyright-year"
+  ).textContent = new Date().getFullYear();
 }
 
 main();

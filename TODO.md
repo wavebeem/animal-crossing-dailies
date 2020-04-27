@@ -1,4 +1,4 @@
-- Spacing
 - Favicon
-- Clear all data button
+- Meta tags
+- Domain
 - Google Analytics

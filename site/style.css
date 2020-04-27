@@ -42,8 +42,7 @@ h4 {
 }
 
 body {
-  display: flex;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 0;
   max-width: 600px;
 }
@@ -57,6 +56,10 @@ button {
 
 a {
   color: inherit;
+}
+
+a:hover {
+  opacity: 0.9;
 }
 
 ac-daily {
@@ -78,7 +81,6 @@ ac-daily {
 }
 
 .description {
-  flex: 1 1 auto;
   padding-left: 0.5rem;
   user-select: none;
   align-self: center;
@@ -133,7 +135,7 @@ ac-daily {
   background: var(--content-bg-hover);
 }
 
-.clear-all {
+.reset {
   background: var(--danger-bg);
   color: var(--danger-fg);
   border: 0;
@@ -141,7 +143,7 @@ ac-daily {
   padding: 0.25rem 0.5rem;
 }
 
-.clear-all:hover {
+.reset:hover {
   background: var(--danger-bg-hover);
 }
 
