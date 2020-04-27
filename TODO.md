@@ -1,3 +1,4 @@
 - Spacing
 - Favicon
 - Clear all data button
+- Google Analytics
