@@ -9,24 +9,26 @@
   </head>
   <body class="grid-1col">
     <h1 class="padding">AC Dailies</h1>
-    <div class="padding">
+    <div class="padding grid-1col">
       <h2>Last Daily Completed</h2>
       <div data-name="last-updated"></div>
+      <div>
+        <button type="button" class="clear-all" id="clear-all">
+          Clear All Data
+        </button>
+      </div>
     </div>
     <main class="grid-1col">
       <section class="grid-1col list-container">
         <h2 class="padding">Daily Tasks</h2>
         <div class="grid-1col section">
-          <ac-daily
-            data-description="Catch 5 wasps"
-            data-key="wasps"
-          ></ac-daily>
+          <ac-daily data-description="Catch wasps" data-key="wasps"></ac-daily>
           <ac-daily
             data-description="Dig up 4 fossils"
             data-key="fossils"
           ></ac-daily>
           <ac-daily
-            data-description="Find 2 furniture pieces in trees"
+            data-description="Find furniture pieces in trees"
             data-key="tree-furniture"
           ></ac-daily>
           <ac-daily
@@ -54,7 +56,7 @@
             data-key="money-tree"
           ></ac-daily>
           <ac-daily
-            data-description="Harvest 6 rocks"
+            data-description="Hit 6 rocks"
             data-key="harvest-rocks"
           ></ac-daily>
           <ac-daily
@@ -69,10 +71,7 @@
             data-description="Check afternoon turnip price"
             data-key="pm-turnip"
           ></ac-daily>
-          <ac-daily
-            data-description="Use the ATM"
-            data-key="atm"
-          ></ac-daily>
+          <ac-daily data-description="Use the ATM" data-key="atm"></ac-daily>
           <ac-daily
             data-description="Check the K.K. Slider song"
             data-key="kk-song"
@@ -82,21 +81,18 @@
             data-key="lost-and-found"
           ></ac-daily>
           <ac-daily
-            data-description="Pick weeds"
-            data-key="weeds"
-          ></ac-daily>
-          <ac-daily
-            data-description="Check Able Sisters shop"
+            data-description="Check Able Sisters"
             data-key="able"
           ></ac-daily>
           <ac-daily
-            data-description="Check Nook shop"
+            data-description="Check Nook's Cranny"
             data-key="nook"
           ></ac-daily>
+          <ac-daily data-description="Pick weeds" data-key="weeds"></ac-daily>
         </div>
       </section>
     </main>
-    <footer class="footer bubble">
+    <footer class="footer">
       &copy; 2020 <a href="https://mockbrian.com">Brian Mock</a>
       &bullet;
       <a href="https://github.com/wavebeem/animal-crossing-dailies">GitHub</a>

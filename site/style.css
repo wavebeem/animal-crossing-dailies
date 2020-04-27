@@ -9,6 +9,10 @@
 
   --section-bg: hsl(140, 40%, 65%);
 
+  --danger-bg: hsl(20, 90%, 40%);
+  --danger-fg: hsl(60, 35%, 95%);
+  --danger-bg-hover: hsl(20, 90%, 35%);
+
   --check-bg: hsl(60, 35%, 100%);
   --check-fg: hsl(60, 90%, 20%);
   --check-border: hsl(60, 90%, 30%);
@@ -39,36 +43,38 @@ h4 {
 
 body {
   display: flex;
-  margin: 1rem auto;
+  margin: 2rem auto;
   padding: 0;
   max-width: 600px;
 }
 
-footer {
-  text-align: center;
-}
-
-main {
-  flex: 1 1 auto;
-}
-
-ac-daily {
-  display: contents;
-}
-
-.grid-1col {
-  display: grid;
-  grid-gap: 0.5rem;
-}
-
 input,
 button {
+  -webkit-appearance: none;
   color: inherit;
   font: inherit;
 }
 
 a {
   color: inherit;
+}
+
+ac-daily {
+  display: contents;
+}
+
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px white, 0 0 0 3px black;
+}
+
+.footer {
+  text-align: center;
+}
+
+.grid-1col {
+  display: grid;
+  grid-gap: 0.5rem;
 }
 
 .description {
@@ -101,11 +107,6 @@ a {
   box-shadow: inset 0 0 0 4px var(--check-bg), 0 0 0 1px white, 0 0 0 3px black;
 }
 
-.flex {
-  display: flex;
-  align-items: center;
-}
-
 .section {
   padding: 0.5rem;
   background: var(--section-bg);
@@ -130,6 +131,18 @@ a {
 
 .daily-content:hover {
   background: var(--content-bg-hover);
+}
+
+.clear-all {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+  border: 0;
+  border-radius: var(--border-radius);
+  padding: 0.25rem 0.5rem;
+}
+
+.clear-all:hover {
+  background: var(--danger-bg-hover);
 }
 
 @media (min-width: 600px) {

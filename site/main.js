@@ -87,17 +87,21 @@ function formatDate(date) {
   }).format(date);
 }
 
+function updateTimestamp(timestamp) {
+  const lastUpdated = document.querySelector("[data-name='last-updated']");
+  const date = new Date(timestamp);
+  lastUpdated.textContent = formatDate(date);
+}
+
 function main() {
   const state = new State();
-  const lastUpdated = document.querySelector("[data-name='last-updated']");
-  const date = new Date(state.data._last_updated);
-  lastUpdated.textContent = formatDate(date);
+  updateTimestamp(state.data._last_updated);
+  state.data._last_updated;
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {
       state.update(daily.dataset.key, event.detail);
-      const date = new Date(state.data._last_updated);
-      lastUpdated.textContent = formatDate(date);
+      updateTimestamp(state.data._last_updated);
     });
   }
   customElements.define("ac-daily", ACDailyElement);
