@@ -2,6 +2,8 @@
   --body-bg: hsl(130, 40%, 95%);
   --body-fg: hsl(60, 90%, 20%);
 
+  --title-fg: hsl(120, 100%, 25%);
+
   --content-bg: hsl(60, 35%, 95%);
   --content-bg-hover: hsl(60, 35%, 90%);
   --content-fg: hsl(60, 90%, 20%);
@@ -30,6 +32,10 @@
   margin: 0;
   /* Tabular numbers */
   font-feature-settings: "tnum";
+}
+
+.title {
+  color: var(--title-fg);
 }
 
 h1,
@@ -67,6 +73,10 @@ ac-daily {
 :focus {
   outline: none;
   box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+}
+
+::-moz-focus-inner {
+  border: 0;
 }
 
 .footer {
