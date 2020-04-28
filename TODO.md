@@ -1,4 +1,1 @@
-- Favicon
-- Meta tags
-- Domain
-- Google Analytics
+- Re-order things

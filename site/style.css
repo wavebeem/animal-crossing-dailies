@@ -32,6 +32,7 @@
   margin: 0;
   /* Tabular numbers */
   font-feature-settings: "tnum";
+  line-height: 1.5;
 }
 
 .title {
@@ -67,7 +68,7 @@ a:hover {
 }
 
 ac-daily {
-  display: contents;
+  display: inline-block;
 }
 
 :focus {
@@ -168,7 +169,7 @@ ac-daily {
   color: var(--danger-fg);
   border: 0;
   border-radius: var(--border-radius);
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
 }
 
 .reset:hover {
