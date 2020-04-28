@@ -129,6 +129,10 @@ ac-daily {
   box-shadow: inset 0 0 0 4px var(--check-bg), 0 0 0 2px white, 0 0 0 4px black;
 }
 
+.checkbox:active {
+  transform: scale(0.95);
+}
+
 .section {
   background: var(--section-bg);
   border-radius: var(--border-radius);
@@ -174,4 +178,8 @@ ac-daily {
 
 .reset:hover {
   background: var(--danger-bg-hover);
+}
+
+.reset:active {
+  transform: scale(0.95);
 }
