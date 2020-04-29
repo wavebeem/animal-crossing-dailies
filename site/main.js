@@ -93,6 +93,16 @@ function updateTimestamp(timestamp) {
   lastUpdated.textContent = formatDate(date);
 }
 
+function htmlChar(c) {
+  const code = `&${c};`;
+  if (!/^[a-z]+$/i.test(c)) {
+    return code;
+  }
+  const div = document.createElement("div");
+  div.innerHTML = code;
+  return div.textContent;
+}
+
 function main() {
   const state = new State();
   updateTimestamp(state.data._last_updated);
@@ -110,9 +120,8 @@ function main() {
       daily.value = false;
     }
   });
-  document.querySelector(
-    "#copyright-year"
-  ).textContent = new Date().getFullYear();
+  document.querySelector("#copyright-year").textContent =
+    htmlChar("copy") + " " + new Date().getFullYear();
 }
 
 main();
