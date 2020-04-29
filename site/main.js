@@ -8,6 +8,11 @@ class ACDailyElement extends HTMLElement {
     this.description.textContent = this.dataset.description;
     this.checkbox.addEventListener("change", (event) => {
       this.value = event.target.checked;
+      track(
+        "dailies",
+        event.target.checked ? "check" : "uncheck",
+        this.dataset.key
+      );
     });
     this._isInitializing = false;
   }
@@ -45,8 +50,8 @@ class State {
     this.storage = new Storage();
     this.key = "state";
     this.data = this.storage.get(this.key, {
-      _version: "1",
-      _last_updated: new Date().toISOString(),
+      "meta/version": "1",
+      "meta/last-updated": new Date().toISOString(),
     });
   }
 
@@ -59,8 +64,8 @@ class State {
   }
 
   update(key, value) {
-    this.data._version = "1";
-    this.data._last_updated = new Date().toISOString();
+    this.data["meta/version"] = "1";
+    this.data["meta/last-updated"] = new Date().toISOString();
     this.data[`dailies/${key}`] = value;
     this.storage.set(this.key, this.data);
   }
@@ -93,14 +98,12 @@ function updateTimestamp(timestamp) {
   lastUpdated.textContent = formatDate(date);
 }
 
-function htmlChar(c) {
-  const code = `&${c};`;
-  if (!/^[a-z]+$/i.test(c)) {
-    return code;
-  }
-  const div = document.createElement("div");
-  div.innerHTML = code;
-  return div.textContent;
+function track(category, action, label) {
+  gtag("event", action, {
+    event_category: category,
+    event_label: label,
+  });
+  console.log(category, action, label);
 }
 
 function main() {
@@ -119,9 +122,11 @@ function main() {
     for (const daily of document.querySelectorAll("ac-daily")) {
       daily.value = false;
     }
+    track("reset", "click", "reset-dailies");
   });
-  document.querySelector("#copyright-year").textContent =
-    htmlChar("copy") + " " + new Date().getFullYear();
+  document.querySelector(
+    "#copyright-year"
+  ).textContent = new Date().getFullYear();
 }
 
 main();
