@@ -49,10 +49,18 @@ class State {
   constructor() {
     this.storage = new Storage();
     this.key = "state";
-    this.data = this.storage.get(this.key, {
-      "meta/version": "1",
-      "meta/last-updated": new Date().toISOString(),
-    });
+    this.data = this.storage.get(this.key, {});
+    for (const key of Object.keys(this.data)) {
+      if (!(key.startsWith("meta/") || key.startsWith("dailies/"))) {
+        delete this.data[key];
+      }
+    }
+    if (!("meta/version" in this.data)) {
+      this.data["meta/version"] = "1";
+    }
+    if (!("meta/last-updated" in this.data)) {
+      this.data["meta/last-updated"] = new Date().toISOString();
+    }
   }
 
   get(key, fallback) {
@@ -109,7 +117,6 @@ function track(category, action, label) {
 function main() {
   const state = new State();
   updateTimestamp(state.data["meta/last-updated"]);
-  state.data["meta/last-updated"];
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {
