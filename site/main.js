@@ -108,13 +108,13 @@ function track(category, action, label) {
 
 function main() {
   const state = new State();
-  updateTimestamp(state.data._last_updated);
-  state.data._last_updated;
+  updateTimestamp(state.data["meta/last-updated"]);
+  state.data["meta/last-updated"];
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {
       state.update(daily.dataset.key, event.detail);
-      updateTimestamp(state.data._last_updated);
+      updateTimestamp(state.data["meta/last-updated"]);
     });
   }
   customElements.define("ac-daily", ACDailyElement);
