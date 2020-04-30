@@ -48,6 +48,10 @@ class State {
     this.sanitize();
   }
 
+  lastUpdated() {
+    return new Date(this.data["meta/last-updated"]);
+  }
+
   sanitize() {
     for (const key of Object.keys(this.data)) {
       if (!(key.startsWith("meta/") || key.startsWith("dailies/"))) {
@@ -92,8 +96,9 @@ function copyTemplate(element, id) {
   element.appendChild(document.getElementById(id).content.cloneNode(true));
 }
 
-function formatDate(date) {
-  return new Intl.DateTimeFormat(undefined, {
+function updateTimestamp(date) {
+  const lastUpdated = document.querySelector("[data-name='last-updated']");
+  lastUpdated.textContent = new Intl.DateTimeFormat(undefined, {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -101,12 +106,6 @@ function formatDate(date) {
     minute: "2-digit",
     second: "2-digit",
   }).format(date);
-}
-
-function updateTimestamp(timestamp) {
-  const lastUpdated = document.querySelector("[data-name='last-updated']");
-  const date = new Date(timestamp);
-  lastUpdated.textContent = formatDate(date);
 }
 
 function track(category, action, label) {
@@ -119,13 +118,13 @@ function track(category, action, label) {
 
 function main() {
   const state = new State();
-  updateTimestamp(state.data["meta/last-updated"]);
+  updateTimestamp(state.lastUpdated());
   for (const daily of document.querySelectorAll("ac-daily")) {
     daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {
       state.update(daily.dataset.key, event.detail);
       state.save();
-      updateTimestamp(state.data["meta/last-updated"]);
+      updateTimestamp(state.lastUpdated());
       track("dailies", daily.value ? "check" : "uncheck", daily.dataset.key);
     });
   }
