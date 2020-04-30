@@ -1,20 +1,19 @@
 class ACDailyElement extends HTMLElement {
   connectedCallback() {
-    this._isInitializing = true;
     copyTemplate(this, "template-ac-daily");
     this.description = this.querySelector("[data-name='description']");
     this.checkbox = this.querySelector("[data-name='checkbox']");
-    this.value = JSON.parse(this.dataset.initialValue);
+    this.internalSetValue(JSON.parse(this.dataset.initialValue));
     this.description.textContent = this.dataset.description;
     this.checkbox.addEventListener("change", (event) => {
       this.value = event.target.checked;
-      track(
-        "dailies",
-        event.target.checked ? "check" : "uncheck",
-        this.dataset.key
-      );
     });
-    this._isInitializing = false;
+  }
+
+  internalSetValue(value) {
+    this._value = value;
+    this.checkbox.checked = value;
+    this.dataset.state = value ? "complete" : "incomplete";
   }
 
   get value() {
@@ -22,12 +21,8 @@ class ACDailyElement extends HTMLElement {
   }
 
   set value(value) {
-    this._value = value;
-    this.checkbox.checked = value;
-    this.dataset.state = value ? "complete" : "incomplete";
-    if (!this._isInitializing) {
-      dispatchEvent(this, "update", value);
-    }
+    this.internalSetValue(value);
+    dispatchEvent(this, "update", value);
   }
 }
 
@@ -50,17 +45,17 @@ class State {
     this.storage = new Storage();
     this.key = "state";
     this.data = this.storage.get(this.key, {});
+    this.sanitize();
+  }
+
+  sanitize() {
     for (const key of Object.keys(this.data)) {
       if (!(key.startsWith("meta/") || key.startsWith("dailies/"))) {
         delete this.data[key];
       }
     }
-    if (!("meta/version" in this.data)) {
-      this.data["meta/version"] = "1";
-    }
-    if (!("meta/last-updated" in this.data)) {
-      this.data["meta/last-updated"] = new Date().toISOString();
-    }
+    this.data["meta/version"] = "1";
+    this.data["meta/last-updated"] = new Date().toISOString();
   }
 
   get(key, fallback) {
@@ -71,10 +66,18 @@ class State {
     return fallback;
   }
 
+  reset() {
+    for (const key of Object.keys(this.data)) {
+      delete this.data[key];
+    }
+  }
+
   update(key, value) {
-    this.data["meta/version"] = "1";
-    this.data["meta/last-updated"] = new Date().toISOString();
     this.data[`dailies/${key}`] = value;
+  }
+
+  save() {
+    this.sanitize();
     this.storage.set(this.key, this.data);
   }
 }
@@ -121,14 +124,18 @@ function main() {
     daily.dataset.initialValue = state.get(daily.dataset.key, false);
     daily.addEventListener("update", (event) => {
       state.update(daily.dataset.key, event.detail);
+      state.save();
       updateTimestamp(state.data["meta/last-updated"]);
+      track("dailies", daily.value ? "check" : "uncheck", daily.dataset.key);
     });
   }
   customElements.define("ac-daily", ACDailyElement);
   document.querySelector("#reset").addEventListener("click", () => {
     for (const daily of document.querySelectorAll("ac-daily")) {
-      daily.value = false;
+      daily.internalSetValue(false);
     }
+    state.reset();
+    state.save();
     track("reset", "click", "reset-dailies");
   });
   document.querySelector(
